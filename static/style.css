@@ -1,0 +1,40 @@
+.dancing-script-700 {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.smooch-sans-700 {
+  font-family: "Smooch Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.fjalla-one {
+  font-family: "Fjalla One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.farsan {
+  font-family: "Farsan", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bungee {
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bar-light {
+    background-color: rgba(217, 217, 217, 1);
+    position: sticky; top: 0;
+}
+
+.menu {
+    
+}
