@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 .dancing-script-700 {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
@@ -30,11 +35,54 @@
   font-style: normal;
 }
 
+body {
+  background-color: rgba(205, 208, 249, 1);
+  padding: 0;
+}
+
 .bar-light {
-    background-color: rgba(217, 217, 217, 1);
+    /* Dark Mode: background-color: rgba(217, 217, 217, 1); */
+    background-color: white;
     position: sticky; top: 0;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 
 .menu {
-    
+    background-color: rgba(130, 77, 132, 1);
+    border-radius: 500px;
+}
+
+.menu-item {
+  font-size: large;
+  max-height: fit-content
+}
+
+.bar-collum {
+  display: grid;
+  grid-template-columns: 0fr 5fr 3fr 2fr 0.21fr;
+  margin-bottom: 1em;
+}
+
+.half-circle {
+  width: 100%;
+  height: 2.5em;
+  border-radius: 50%;
+  background: linear-gradient(to right, black 50%, white 50%);
+  border: 1px solid black;
+}
+
+.navigation-collum {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.white {
+  color: white;
+}
+
+input {
+  max-height: 2em;
 }

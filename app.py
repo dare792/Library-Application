@@ -26,7 +26,7 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 
 def home():
-    return render_template('layout.html')
+    return render_template('home.html')
 
 
 if __name__ == '__main__':

@@ -10,19 +10,39 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <title>Zentral- und Landesbibliothek</title>
 </head>
-<body class="w3-container" style="padding-left: 0%; padding-right: 0%;">
+<body class="w3-container">
     <!-- Shared Header -->
-     <header class="w3-container w3-padding-20 bar-light">
-        <h1 class="dancing-script-700">Zentral und Landesbibliothek Christchurch</h1>
-     </header>
+     <section>
+        <div class="w3-container bar-light">
+        <h1 class="dancing-script-700" style="font-size: 300%;">Zentral und Landesbibliothek Christchurch</h1>
+        </div>
+     </section>
 
      <!-- Shared Nav-Bar -->
-      <nav class="w3-bar bar-light">
-        <div class="menu">
-            <a href="/" class="w3-bar-item w3-button">Home</a>
-        </div>
-        
-        
+      <nav class="w3-bar bar-light bungee">
+        <div class="w3-container bar-collum">
+            <div class="navigation-collum menu" style="padding-right: 1em; padding-left: 1em; padding-top: 1em;">
+                <a href="/" class="w3-bar-item w3-button white menu-item">Home</a>
+                <a href="" class="w3-bar-item w3-button white menu-item">Books</a>
+                <a href="" class="w3-bar-item w3-button white menu-item">Films</a>
+                <a href="" class="w3-bar-item w3-button white menu-item">Games</a>
+                <a href="" class="w3-bar-item w3-button white menu-item">Vynils</a>
+                <div class="w3-bar-item w3-right">
+                    <form action="#">
+                        <input type="text" placeholder="Search Library" name="Search" class="w3-bar-item w3-input w3-border">
+                        <button type="submit" class="w3-bar-item w3-button"><i></i></button>
+                    </form>
+                </div>
+            </div>
+            <div></div>
+            <a href="#" class="w3-bar-item w3-button menu white" style="max-width: fit-content; margin-left: 18em; max-height: fit-content;">Login</a>
+            <a href="#">
+            <div class="w3-button half-circle" title="Change Appearance"></div>
+            </a>
+        </div>  
       </nav>
+
+      {% block body %} {% endblock %}
+      
 </body>
 </html>
