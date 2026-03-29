@@ -3,6 +3,11 @@ html, body {
   padding: 0;
 }
 
+:root {
+  --colour_light_blue: rgba(205, 208, 249, 1);
+  --colour_purple: rgba(130, 77, 132, 1);
+}
+
 .dancing-script-700 {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
@@ -36,8 +41,19 @@ html, body {
 }
 
 body {
-  background-color: rgba(205, 208, 249, 1);
+  background-color: var(--colour_light_blue);
   padding: 0;
+}
+
+nav {
+  position: sticky;
+  position: top;
+  padding-top: 1em;
+}
+
+.section_top {
+  position: sticky;
+  position: top;
 }
 
 .bar-light {
@@ -49,7 +65,7 @@ body {
 }
 
 .menu {
-    background-color: rgba(130, 77, 132, 1);
+    background-color: var(--colour_purple);
     border-radius: 500px;
 }
 
@@ -85,4 +101,11 @@ body {
 
 input {
   max-height: 2em;
+}
+
+.home-image {
+  transform: scaleX(-1);
+  width: 100%;
+  /* max-height: 30em; */
+  overflow-x: hidden;
 }
