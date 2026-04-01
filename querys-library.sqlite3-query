@@ -1,0 +1,7 @@
+-- database: ./database.db
+
+SELECT * FROM books;
+
+-- query to select every item from books (film, games and vynils) tabel
+SELECT book_id, book_name, image_url FROM books;
+-- add future tables later

@@ -1,11 +1,15 @@
 html, body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 :root {
   --colour_light_blue: rgba(205, 208, 249, 1);
   --colour_purple: rgba(130, 77, 132, 1);
+  --colour_orange: rgba(189, 57, 57, 1);
+  --colour_grey: rgba(217, 217, 217, 1);
+  --colour_blue: rgba(94, 111, 218, 1);
 }
 
 .dancing-script-700 {
@@ -45,6 +49,18 @@ body {
   padding: 0;
 }
 
+.hide-scrollbar {
+  /* For Internet Explorer and Edge */
+  -ms-overflow-style: none;
+  /* For Firefox */
+  scrollbar-width: none;
+}
+
+/* For Chrome, Safari, Opera, and other WebKit browsers */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 nav {
   position: sticky;
   position: top;
@@ -58,7 +74,7 @@ nav {
 
 .bar-light {
     /* Dark Mode: background-color: rgba(217, 217, 217, 1); */
-    background-color: white;
+    background-color: var(--colour_grey);
     position: sticky; top: 0;
     margin-left: 0%;
     margin-right: 0%;
@@ -104,8 +120,100 @@ input {
 }
 
 .home-image {
+  display: block;
   transform: scaleX(-1);
   width: 100%;
+  height: auto;
   /* max-height: 30em; */
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.background-img-container {
+  background-image: url("https://zella-mehlis.de/media/pages/freizeit/kultur-freizeiteinrichtungen/bibliothek/23d60e33b7-1706626550/zella-mehlis-header-freizeit-einrichtungen-bibliothek-by-paul-hentschel-photography-by-ph-enterprise.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  display: flex;
+  padding: 3em;
+  position: relative;
+}
+
+.white-background {
+  border-radius: 25px;
+  margin: 0;
+  padding: 1em;
+  width: 40%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.5)
+}
+
+.explore-button {
+  background-color: var(--colour_orange);
+  height: fit-content;
+  position: absolute;
+  top: 72.5%;
+  right: 10%;
+  border-radius: 25px;
+  padding-right: 0.8em;
+  padding-left: 0.8em;
+  text-decoration: none;
+  color: white;
+}
+
+.az-two-collum {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  height: 100vh;
+  padding-right: 0;
+}
+
+.az-list-container {
+  height: 100%;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.az-list {
+  padding-left: 43%;
+  padding-top: 1em;
+  margin: 0;
+  list-style-type: none;
+  background-color: white;
+  position: sticky; top: 107.28px;
+}
+
+.az-list-item {
+  font-size: larger;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.az-list-item.active {
+  font-weight: bold;
+  color: var(--colour_orange);
+  background-color: rgba(189, 57, 57, 0.15);
+  padding: 0.25em 0.5em;
+  border-radius: 4px;
+}
+
+.four-collum {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2em;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.gallery-item {
+  padding: 1em;
+  border-radius: 25px;
+  text-decoration: none;
+  background-color: var(--colour_blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
