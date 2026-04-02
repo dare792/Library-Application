@@ -3,7 +3,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const letterLinks = document.querySelectorAll('.az-list-item');
-    const galleryContainer = document.querySelector('.four-collum');
+    const galleryContainer = document.querySelector('.five-collum');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
     // Track the currently active letter (for avoiding redundant updates)
@@ -29,15 +29,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /**
      * Scroll to the first item matching a specific letter
+     * Only scrolls the gallery container, not parent elements (keeps navbar visible)
      * @param {string} letter - The letter to scroll to
      */
     function scrollToLetter(letter) {
         const firstItem = document.querySelector(`.gallery-item[data-letter="${letter}"]`);
         if (firstItem && galleryContainer) {
-            firstItem.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            // Calculate the scroll position relative to the container
+            // We need to account for the item's position within the scrollable container
+            const containerScrollTop = galleryContainer.scrollTop;
+            const itemPosition = firstItem.getBoundingClientRect();
+            const containerPosition = galleryContainer.getBoundingClientRect();
+            
+            // Calculate where to scroll to
+            const scrollTo = containerScrollTop + (itemPosition.top - containerPosition.top);
+            
+            // Smooth scroll only the gallery container
+            galleryContainer.scrollTo({
+                top: scrollTo,
+                behavior: 'smooth'
             });
+            
             setActiveLetter(letter);
         }
     }

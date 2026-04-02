@@ -1,4 +1,4 @@
-from flask import Flask, g, render_template
+from flask import Flask, g, render_template, request
 import sqlite3
 
 DATABASE = "database.db"
@@ -32,7 +32,7 @@ def home():
 @app.route("/collection")
 
 def collection():
-    #sql = "SELECT book_id, book_name, image_url FROM books;"
+    #implement other tables in the future
     sql = """SELECT book_id, book_name, image_url, description
         FROM books
         ORDER BY
@@ -53,8 +53,6 @@ def collection():
         else:
             pass
     letters.sort(key=lambda x: (x.isdigit(), x))
-
-    #return str(results)
     return render_template('collection.html', results=results, letters=letters)
 
 
@@ -62,7 +60,61 @@ def collection():
 
 def item(id):
     
-    return render_template("item")
+    return render_template("item.html")
+
+
+@app.route("/books")
+
+def books():
+    sql = """SELECT book_id, book_name, image_url, description
+        FROM books
+        ORDER BY
+            CASE
+                WHEN book_name GLOB '[0-9]*' THEN 1
+                ELSE 0
+            END ASC,
+            book_name ASC"""
+    results = query_db(sql)
+    
+    #Listing all Letters from A-Z to be used in HTML
+    letters = []
+    for result in results:
+        letter = result[1][0]
+        if letter not in letters:
+            letter = letter.upper()
+            letters.append(letter)
+        else:
+            pass
+    letters.sort(key=lambda x: (x.isdigit(), x))
+    return render_template('collection.html', results=results, letters=letters)
+
+
+#search route
+@app.route("/search")
+
+def search():
+    sql = request.args.get("q") #get q parameter from url
+    
+    results = query_db("""SELECT book_id, book_name, image_url, description FROM books WHERE book_name LIKE ?
+                       ORDER BY
+                        CASE
+                        WHEN book_name GLOB '[0-9]*' THEN 1
+                        ELSE 0
+                        END ASC,
+                        book_name ASC""", ('%' + sql + '%',))
+
+    #Listing all Letters from A-Z to be used in HTML
+    letters = []
+    for result in results:
+        letter = result[1][0]
+        if letter not in letters:
+            letter = letter.upper()
+            letters.append(letter)
+        else:
+            pass
+    letters.sort(key=lambda x: (x.isdigit(), x))
+
+    return render_template("search.html", results=results, letters=letters)
 
 
 if __name__ == '__main__':

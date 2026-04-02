@@ -25,19 +25,21 @@
         <div class="w3-container bar-collum">
             <div class="navigation-collum menu" style="padding-right: 1em; padding-left: 1em; padding-top: 1em;">
                 <a href="/" class="w3-bar-item w3-button white menu-item">Home</a>
-                <a href="" class="w3-bar-item w3-button white menu-item">Books</a>
+                <a href="{{url_for('books')}}" class="w3-bar-item w3-button white menu-item">Books</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Films</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Games</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Vynils</a>
                 <div class="w3-bar-item w3-right">
-                    <form action="#">
-                        <input type="text" placeholder="Search Library" name="Search" class="w3-bar-item w3-input w3-border">
-                        <button type="submit" class="w3-bar-item w3-button"></button>
+                    <form action="/search" method="GET">
+                        <input type="text" placeholder="Search Library" name="q" class="w3-bar-item w3-input w3-border" required>
+                        <button type="submit" class="w3-bar-item w3-button">Search</button>
                     </form>
                 </div>
             </div>
             <div></div>
-            <a href="#" class="w3-bar-item w3-button menu white" style="max-width: fit-content; margin-left: 18em; max-height: fit-content;">Login</a>
+            <div class="menu" style="margin-left: 18em; max-height: 3em;">
+                <a href="#" class="w3-bar-item w3-button menu-item white">Login</a>
+            </div>
             <a href="#">
             <div class="w3-button half-circle" title="Change Appearance"></div>
             </a>

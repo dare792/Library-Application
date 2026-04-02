@@ -10,7 +10,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="five-collum" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
+        <div class="four-collum" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
             {% for result in results %}
                 <a class="gallery-item" href="{{ url_for('item', id=result[0]) }}" data-letter="{{ result[1][0]|upper }}">
                     <img src="{{ result[2] }}" alt="{{ result[1] }}">

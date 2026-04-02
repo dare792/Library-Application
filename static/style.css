@@ -10,6 +10,8 @@ html, body {
   --colour_orange: rgba(189, 57, 57, 1);
   --colour_grey: rgba(217, 217, 217, 1);
   --colour_blue: rgba(94, 111, 218, 1);
+
+  --size_circle: 2.8em;
 }
 
 .dancing-script-700 {
@@ -67,6 +69,16 @@ nav {
   padding-top: 1em;
 }
 
+input {
+  font-family: sans-serif;
+}
+
+input::placeholder {
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .section_top {
   position: sticky;
   position: top;
@@ -83,11 +95,15 @@ nav {
 .menu {
     background-color: var(--colour_purple);
     border-radius: 500px;
+    width: fit-content;
 }
 
 .menu-item {
-  font-size: large;
-  max-height: fit-content
+  font-size: 1vw;
+  max-height: fit-content;
+  max-width: fit-content;
+  text-decoration: none;
+  border-radius: 25px;
 }
 
 .bar-collum {
@@ -98,7 +114,8 @@ nav {
 
 .half-circle {
   width: 100%;
-  height: 2.5em;
+  height: var(--size_circle);
+  width: var(--size_circle);
   border-radius: 50%;
   background: linear-gradient(to right, black 50%, white 50%);
   border: 1px solid black;
@@ -162,9 +179,10 @@ input {
 
 .az-two-collum {
   display: grid;
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: 1fr 16fr;
   height: 100vh;
   padding-right: 0;
+  padding-bottom: 13em;
 }
 
 .az-list-container {
@@ -198,9 +216,9 @@ input {
   border-radius: 4px;
 }
 
-.four-collum {
+.five-collum {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 2em;
   overflow-y: auto;
   scroll-behavior: smooth;
