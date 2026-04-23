@@ -12,41 +12,47 @@
 </head>
 <body>
     <!-- Shared Header -->
-     <section class="section-top">
+<!--      <section class="section-top">
         <div class="w3-container bar-light">
         <a href="/" style="text-decoration: none;">
-        <h1 class="dancing-script-700" style="font-size: 300%; margin-left: 0.5em;">Zentral- und Landesbibliothek Christchurch <!-- Would rather have a logo here --></h1>
+        <h1 class="dancing-script-700" style="font-size: 300%; margin-left: 0.5em;">Zentral- und Landesbibliothek Christchurch</h1>
         </a>
         </div>
-     </section>
+     </section> -->
 
      <!-- Shared Nav-Bar -->
-      <nav class="w3-bar bar-light bungee">
-        <div class="w3-container bar-collum">
-            <div class="navigation-collum menu" style="padding-right: 1em; padding-left: 1em; padding-top: 1em;">
+    <nav class="w3-bar bar-light bungee">
+        <div class="bar-collum">
+            <ul style="flex: auto;" class="menu">
                 <a href="/" class="w3-bar-item w3-button white menu-item">Home</a>
                 <a href="{{url_for('books')}}" class="w3-bar-item w3-button white menu-item">Books</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Films</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Games</a>
-                <a href="" class="w3-bar-item w3-button white menu-item">Vynils</a>
-                <div class="w3-bar-item w3-right">
+                <a href="" class="w3-bar-item w3-button white menu-item">Vynils</a>    
+            </ul>
+            <ul class="menu" style="flex: auto; width: 100%;">
+                <div>
                     <form action="/search" method="GET">
                         <input type="text" placeholder="Search Library" name="q" class="w3-bar-item w3-input w3-border" required>
-                        <button type="submit" class="w3-bar-item w3-button">Search</button>
+                        <!-- <button style="position: absolute; top: 47%; left: 46vw; padding: 0;" type="submit" class="w3-bar-item w3-button">🔍</button> -->
                     </form>
                 </div>
-            </div>
-            <div></div>
-            <div class="menu" style="margin-left: 18em; max-height: 3em;">
+            </ul>
+            <ul class="menu" style="flex: auto;">
                 <a href="#" class="w3-bar-item w3-button menu-item white">Login</a>
-            </div>
-            <a href="#">
-            <div class="w3-button half-circle" title="Change Appearance"></div>
-            </a>
+            </ul>
+            <ul style="flex: auto;">
+                <a href="#">
+                        <div class="w3-button half-circle" title="Change Appearance"></div>
+                </a>
+            </ul>
         </div>  
       </nav>
 
+
       {% block body %} {% endblock %}
+      
+      <script src="{{url_for('static', filename='no-form-pop-up.js')}}"></script>
       <script src="{{url_for('static', filename='scroll-nav.js')}}"></script>
 </body>
 </html>

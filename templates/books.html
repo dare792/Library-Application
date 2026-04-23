@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
 
-    <div class="az-two-collum hide-scrollbar">
-        <div class="az-list-container">
+    <div class="az-two-collum">
+        <div class="az-list-container hide-scrollbar">
             <ul class="az-list">
                 {% for letter in letters %}
                     <li><a href="#" class="az-list-item" data-letter="{{ letter }}">{{ letter }}</a></li>
@@ -10,9 +10,9 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="four-collum" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
+        <div class="grid-container" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
             {% for result in results %}
-                <a class="gallery-item" href="{{ url_for('item', id=result[0]) }}" data-letter="{{ result[1][0]|upper }}">
+                <a class="grid-item" href="{{ url_for('item', id=result[0]) }}" data-letter="{{ result[1][0]|upper }}">
                     <img src="{{ result[2] }}" alt="{{ result[1] }}">
                     <h1 style="text-align: center;">{{ result[1] }}</h1>
                 </a>

@@ -2,6 +2,11 @@
 
 SELECT * FROM books;
 
--- query to select every item from books (film, games and vynils) tabel
+-- query to select every item from books (film, games and vynils) tabel --
 SELECT book_id, book_name, image_url FROM books;
 -- add future tables later
+
+
+-- query to select login information --
+SELECT users.user_id, user_name, password
+FROM users;

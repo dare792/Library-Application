@@ -3,8 +3,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const letterLinks = document.querySelectorAll('.az-list-item');
-    const galleryContainer = document.querySelector('.five-collum');
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryContainer = document.querySelector('.grid-container');
+    const galleryItems = document.querySelectorAll('.grid-item');
 
     // Track the currently active letter (for avoiding redundant updates)
     let currentActiveLetter = null;
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} letter - The letter to scroll to
      */
     function scrollToLetter(letter) {
-        const firstItem = document.querySelector(`.gallery-item[data-letter="${letter}"]`);
+        const firstItem = document.querySelector(`.grid-item[data-letter="${letter}"]`);
         if (firstItem && galleryContainer) {
             // Calculate the scroll position relative to the container
             // We need to account for the item's position within the scrollable container
