@@ -102,9 +102,7 @@ input::placeholder {
 
 .menu-item {
   padding: 0;
-  font-size: 1vw;
-  max-height: fit-content;
-  max-width: fit-content;
+  font-size: calc(0.6rem + 0.6vw);
   text-decoration: none;
   border-radius: 25px;
   background: none;
@@ -159,14 +157,15 @@ input {
   display: flex;
   padding: 3em;
   position: relative;
+  min-height: fit-content;
 }
 
 .white-background {
+  width: clamp(732, 1000, 1600);
   border-radius: 25px;
   margin: 0;
   padding: 1em;
-  width: 40%;
-  height: 100%;
+  height: fit-content;
   background-color: rgba(255,255,255,0.5)
 }
 
