@@ -23,22 +23,22 @@
      <!-- Shared Nav-Bar -->
     <nav class="w3-bar bar-light bungee">
         <div class="bar-collum">
-            <ul style="flex: auto;" class="menu">
+            <ul class="menu">
                 <a href="/" class="w3-bar-item w3-button white menu-item">Home</a>
                 <a href="{{url_for('books')}}" class="w3-bar-item w3-button white menu-item">Books</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Films</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Games</a>
                 <a href="" class="w3-bar-item w3-button white menu-item">Vynils</a>    
             </ul>
-            <ul class="menu" style="flex: auto; width: 100%; max-height: fit-content+1em; padding: 0.5em;">
-                <div>
-                    <form action="/search" method="GET">
-                        <input type="text" placeholder="Search Library" name="q" class="w3-bar-item w3-input w3-border" required>
-                        <!-- <button style="position: absolute; top: 47%; left: 46vw; padding: 0;" type="submit" class="w3-bar-item w3-button">🔍</button> -->
+            <ul class="menu" style="flex: auto; width: 100%; max-height: fit-content+1em;padding: 0.5em; padding-left: 1em; padding-right: 1em;">
+                <div class="search-bar">
+                    <form action="/search" method="GET" class="search-input">
+                        <input type="text" placeholder="Search Library" name="q" class="w3-bar-item search-input" required>
+                        <button type="submit" class="w3-button search-button">🔍</button>
                     </form>
                 </div>
             </ul>
-            <ul class="menu" style="flex: auto;">
+            <ul class="menu">
                 <a href="#" class="w3-bar-item w3-button menu-item white">Login</a>
             </ul>
             <ul style="flex: auto;">
