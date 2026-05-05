@@ -13,9 +13,11 @@
         <div class="grid-container" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
             {% for result in results %}
                 <a class="grid-item" href="{{ url_for('item', id=result[0]) }}" data-letter="{{ result[1][0]|upper }}">
-                    <img src="{{ result[2] }}" alt="{{ result[1] }}" class="grid-item-image">
-                    <div class="grid-item-overlay">
-                        <span>{{ result[1] }}</span>
+                    <div class="grid-item-image">
+                        <img src="{{ result[2] }}" alt="{{ result[1] }}">
+                        <div class="grid-item-overlay">
+                            <span class="smooch-sans-700">{{ result[1] }}</span>
+                        </div>
                     </div>
                 </a>
             {% endfor %}

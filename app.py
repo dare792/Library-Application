@@ -93,7 +93,7 @@ def books():
 @app.route("/search")
 
 def search():
-    sql = request.args.get("q") #get q parameter from url
+    term = request.args.get("q") #get q parameter from url
     
     results = query_db("""SELECT book_id, book_name, image_url, description FROM books WHERE book_name LIKE ?
                        ORDER BY
@@ -101,7 +101,7 @@ def search():
                         WHEN book_name GLOB '[0-9]*' THEN 1
                         ELSE 0
                         END ASC,
-                        book_name ASC""", ('%' + sql + '%',))
+                        book_name ASC""", ('%' + term + '%',))
 
     #Listing all Letters from A-Z to be used in HTML
     letters = []
@@ -114,7 +114,7 @@ def search():
             pass
     letters.sort(key=lambda x: (x.isdigit(), x))
 
-    return render_template("search.html", results=results, letters=letters)
+    return render_template("search.html", results=results, letters=letters, term=term)
 
 
 if __name__ == '__main__':

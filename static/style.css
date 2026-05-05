@@ -246,8 +246,15 @@ input {
   height: 100%;
 }
 
-.grid-item-image {
+.grid-item-image {  
   position: relative;
+  overflow: hidden;
+}
+
+.grid-item-image img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .grid-item-overlay {
@@ -269,11 +276,11 @@ input {
   text-align: center;
   width: 90%;
   color: white;
+  font-size: xx-large;
 }
 
 .grid-item-image:hover .grid-item-overlay {
   opacity: 1;
-  overflow: hidden;
 }
 
 .search-bar {
