@@ -3,17 +3,12 @@
 
 <!-- IS there any way to affect nav bar through here? -->
 
-    <div class="az-two-collum">
-        <div class="az-list-container hide-scrollbar">
-            <ul class="az-list">
-                {% for letter in letters %}
-                    <li><a href="#" class="az-list-item" data-letter="{{ letter }}">{{ letter }}</a></li>
-                    <br>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="grid-container" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
+    <div class="grid-container" style="margin: 2em; margin-top: 0; margin-right: 0; padding-right: 2em;">
+
+        {% if results %}
+
             {% for result in results %}
+
                 <a class="grid-item" href="{{ url_for('item', id=result[0]) }}" data-letter="{{ result[1][0]|upper }}">
                     <div class="grid-item-image">
                         <img src="{{ result[2] }}" alt="{{ result[1] }}">
@@ -22,8 +17,17 @@
                         </div>
                     </div>
                 </a>
+                
             {% endfor %}
-        </div>
+
+        {% else %}
+                
+                <div>
+                    <p class="search-error">Sorry, we couldn't find any matches for "<strong>{{ term }}</strong>". Try checking your spelling or asking us in person, as we may not have that item available.</p>
+                </div>
+
+        {% endif %}
+
     </div>
 
 {% endblock %}

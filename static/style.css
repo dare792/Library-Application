@@ -99,7 +99,6 @@ input::placeholder {
     width: fit-content;
     padding: 0;
     display: flex;
-    justify-content: center;
 }
 
 .menu-item {
@@ -113,7 +112,7 @@ input::placeholder {
 .bar-collum {
   display: grid;
   /* grid-template-columns: 0fr 5fr 7fr 2fr 0.21fr; */
-  grid-template-columns: 5fr 7fr 2fr 1fr;
+  grid-template-columns: 5fr 7fr 2fr 0.1fr;
   gap: 2em;
   margin-bottom: 1em;
 }
@@ -140,6 +139,11 @@ input::placeholder {
 
 input {
   max-height: 2em;
+}
+
+.menu-login {
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 .home-image {
@@ -193,6 +197,7 @@ input {
 }
 
 .az-list-container {
+  min-height: 100vh;
   min-width: 70px;
   height: 100%;
   background-color: white;
@@ -312,4 +317,12 @@ input {
   height: 30px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.search-error {
+  margin: 3em;
+  padding: 1em;
+  border-radius: 25px;
+  font-size: calc(1em + 0.8vw);
+  background-color: var(--colour_orange);
 }
