@@ -10,3 +10,7 @@ SELECT book_id, book_name, image_url FROM books;
 -- query to select login information --
 SELECT users.user_id, user_name, password
 FROM users;
+
+-- query to input signuo info --
+INSERT INTO users (email, username, password, first_name, last_name) 
+VALUES (?, ?, ?, ?, ?)

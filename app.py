@@ -1,9 +1,11 @@
-from flask import Flask, g, render_template, request
 import sqlite3
+from flask import Flask, g, render_template, request, redirect, flash, session
+from werkzeug.security import generate_password_hash, check_password_hash
 
 DATABASE = "database.db"
 
 app = Flask(__name__)
+app.config['PASSWORD_ENCRYPTION'] = 'u19qYPA72Y98CwGtRj1Z'
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -115,6 +117,22 @@ def search():
     letters.sort(key=lambda x: (x.isdigit(), x))
 
     return render_template("search.html", results=results, letters=letters, term=term)
+
+
+#login route
+@app.route("/signup", methods=['GET', 'POST'])
+
+def signup():
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        # Hash the password for security
+        password = generate_password_hash(request.form['password'])
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+
+        try:
+            query_db('''INSET INTO''')
 
 
 if __name__ == '__main__':
