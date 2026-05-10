@@ -39,7 +39,11 @@
                 </div>
             </ul>
             <ul class="menu menu-login">
-                <a href="#" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
+                {% if 'user_id' in session %}
+                    <a href="/logout" class="w3-bar-item w3-button menu-item white logout-btn">Logout</a>
+                {% else %}
+                    <a href="/login" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
+                {% endif %}
             </ul>
             <ul>
                 <a href="#">

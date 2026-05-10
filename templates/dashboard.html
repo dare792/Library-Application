@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+
+        <div style="overflow-y: auto;">
+                <div class="background-img-container">
+                        <div class="white-background">
+                                <h1 class="bungee" style="font-size: calc(1.3rem + 2.2vw);">Zentral- und Landesbibliothek Christchurch</h1>
+                        </div>
+                        <a href="{{ url_for('collection') }}" class="explore-button">
+                                <h2 class="fjalla-one">Explore our collection</h2>
+                        </a>
+                </div>
+        </div>
+
+{% endblock %}

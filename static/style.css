@@ -326,3 +326,8 @@ input {
   font-size: calc(1em + 0.8vw);
   background-color: var(--colour_orange);
 }
+
+.login-panel {
+  width: fit-content;
+  height: fit-content;
+}
