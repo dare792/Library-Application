@@ -56,7 +56,12 @@
 
       {% block body %} {% endblock %}
       
-      <script src="{{url_for('static', filename='no-form-pop-up.js')}}"></script>
-      <script src="{{url_for('static', filename='scroll-nav.js')}}"></script>
+      <!-- {% block scripts %}
+
+        <script src="{{url_for('static', filename='no-form-pop-up.js')}}"></script>
+        <script src="{{url_for('static', filename='scroll-nav.js')}}"></script>
+
+      {% endblock %} -->
+
 </body>
 </html>

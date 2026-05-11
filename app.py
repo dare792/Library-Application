@@ -1,16 +1,18 @@
 import sqlite3
-from flask import Flask, g, render_template, request, redirect, flash, session
+from flask import Flask, g, render_template, request, redirect, flash, session, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
 DATABASE = "database.db"
 
 app = Flask(__name__)
 app.config['PASSWORD_ENCRYPTION'] = 'u19qYPA72Y98CwGtRj1Z'
+app.secret_key = 'bzY4Ho9WtyCoxCyyBFzb'
 
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
+        db.row_factory = sqlite3.Row
     return db
 
 @app.teardown_appcontext
@@ -20,9 +22,7 @@ def close_connection(exception):
         db.close()
 
 def query_db(query, args=(), one=False):
-    db = get_db
     cur = get_db().execute(query, args)
-    db.commit()
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
@@ -30,9 +30,7 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 
 def home():
-    if 'user_id' in session:
-        return redirect('/dashboard')
-        
+            
     return render_template('home.html')
 
 
@@ -137,9 +135,12 @@ def signup():
         last_name = request.form['last_name']
 
         try:
-            query_db('''INSERT INTO users (email, username, password, first_name, last_name) 
+            db = get_db()
+            query_db('''INSERT INTO users (email, user_name, password, first_name, last_name) 
                         VALUES (?, ?, ?, ?, ?)''',
-                    (email, username, password, first_name, last_name))
+                        (email, username, password, first_name, last_name))
+            db.commit()
+
             return redirect('/login')
         
         except sqlite3.IntegrityError:
@@ -156,10 +157,10 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
-        user = query_db('SELECT * FROM users WHERE email = ?', one=True)
+        user = query_db('SELECT * FROM users WHERE email = ?', (email,), one=True)
 
         if user and check_password_hash(user['password'], password):
-            session['user_id'] = user['id']
+            session['user_id'] = user['user_id']
             session['first_name'] = user['first_name']
             return redirect('/dashboard')
         
@@ -168,12 +169,12 @@ def login():
     return render_template('login.html')
 
 #dashboard route
-#Tha dashboard is an extended home route, after successful login
+#The dashboard is an extended home route, after successful login
 @app.route("/dashboard")
 def dashboard():
     if 'user_id' not in session:
         return redirect('/login')
-    
+    return redirect('/')
     return f"Welcome, {session['first_name']}!"
 
 

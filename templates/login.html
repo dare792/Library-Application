@@ -4,9 +4,37 @@
 <section style="display: flex; justify-content: center;">
     <div class="login-panel">
         <div>
-            <form action=""></form>
+            <!-- Display flashed error messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="error-messages">
+                        {% for message in messages %}
+                            <p class="error-text">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form action="/login" method="POST" id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 1em;">
+                Don't have an account? <a href="/signup">Sign up here</a>
+            </p>
         </div>
     </div>
 </section>
 
+<script src="{{ url_for('static', filename='auth-validation.js') }}"></script>
 {% endblock %}
