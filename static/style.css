@@ -10,6 +10,7 @@ html, body {
   --colour_orange: rgba(189, 57, 57, 1);
   --colour_grey: rgba(217, 217, 217, 1);
   --colour_blue: rgba(94, 111, 218, 1);
+  --colour_turquoise: rgba(184, 183, 153, 1);
 
   --size_circle: 2.8em;
 }
@@ -328,6 +329,19 @@ input {
 }
 
 .login-panel {
-  width: fit-content;
-  height: fit-content;
+  margin-top: 3vh;
+  padding: 4vw;
+  display: flex;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: var(--colour_blue);
+}
+
+.welcome-message {
+  background-color: var(--colour_turquoise);
+  align-content: center;
+}
+
+.welcome-message-text {
+ font-size: medium;
 }

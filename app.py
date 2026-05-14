@@ -30,7 +30,8 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 
 def home():
-            
+    if 'user_id' in session:
+        flash (f"Welcome, {session['first_name']}!")
     return render_template('home.html')
 
 

@@ -1,6 +1,16 @@
 {% extends "layout.html" %}
 {% block body %}
 
+        {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                        <div class="welcome-message">
+                                {% for message in messages %}
+                                        <p class="welcome-message-text smooch-sans-700">{{ message }}</p>
+                                {% endfor %}
+                        </div>
+                {% endif %}
+        {% endwith %}
+
         <div style="overflow-y: auto;">
                 <div class="background-img-container">
                         <div class="white-background">

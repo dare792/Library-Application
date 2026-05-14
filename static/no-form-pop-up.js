@@ -1,6 +1,8 @@
 document.addEventListener('invalid', (function() {
   return function(e) {
-    // This stops the browser's default popup bubble
-    e.preventDefault();
+    // Only prevent popup for search bar
+    if (e.target.closest('.search-input-container')) {
+      e.preventDefault();
+    }
   };
 })(), true);
