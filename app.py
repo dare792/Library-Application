@@ -30,7 +30,7 @@ def query_db(query, args=(), one=False):
 @app.route("/")
 
 def home():
-    if 'user_id' in session:
+    if 'user_id' in session and session.pop('show_welcome', False):
         flash (f"Welcome, {session['first_name']}!")
     return render_template('home.html')
 
@@ -163,6 +163,7 @@ def login():
         if user and check_password_hash(user['password'], password):
             session['user_id'] = user['user_id']
             session['first_name'] = user['first_name']
+            session['show_welcome'] = True
             return redirect('/dashboard')
         
         flash('Invalid credentials')

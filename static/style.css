@@ -340,8 +340,12 @@ input {
 .welcome-message {
   background-color: var(--colour_turquoise);
   align-content: center;
+  display: flex;
+  padding-left: 50%;
 }
 
 .welcome-message-text {
- font-size: medium;
+ font-size: calc(1rem + 1vw);
+ padding: 0;
+ margin: 1%;
 }
