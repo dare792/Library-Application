@@ -166,7 +166,7 @@ def login():
             session['show_welcome'] = True
             return redirect('/dashboard')
         
-        flash('Invalid credentials')
+        flash('Invalid credentials!')
     
     return render_template('login.html')
 
