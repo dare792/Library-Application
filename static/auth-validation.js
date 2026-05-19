@@ -1,6 +1,5 @@
-// ========================================
 // Authentication Form Validation Script
-// ========================================
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // Handle signup form if it exists
@@ -16,9 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ========================================
+
 // SIGNUP FORM VALIDATION
-// ========================================
 
 function setupSignupValidation() {
     const passwordInput = document.getElementById('password');
@@ -152,9 +150,8 @@ function validateSignupForm() {
     return true;
 }
 
-// ========================================
+
 // LOGIN FORM VALIDATION
-// ========================================
 
 function setupLoginValidation() {
     const loginForm = document.getElementById('login-form');
@@ -188,9 +185,8 @@ function validateLoginForm() {
     return true;
 }
 
-// ========================================
+
 // UTILITY FUNCTIONS
-// ========================================
 
 function isValidEmail(email) {
     // Basic email validation regex
@@ -199,6 +195,5 @@ function isValidEmail(email) {
 }
 
 function showAlert(message) {
-    // Use browser alert (can be replaced with custom modal later)
     alert(message);
 }
