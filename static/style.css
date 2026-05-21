@@ -337,10 +337,9 @@ input {
 .login-panel {
   margin-top: 3vh;
   padding: 4vw;
-  display: flex;
-  justify-content: center;
   border-radius: 25px;
   background-color: var(--colour_blue);
+  text-align: center;
 }
 
 .welcome-message {
@@ -359,14 +358,26 @@ input {
 .error-message {
   display: flex;
   justify-content: center;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: var(--colour_orange);
   margin-bottom: 1em;
   width: 100%;
 }
 
 .login-form {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
+  text-align: center;
 }
 
+.submit-btn {
+  background-color: var(--colour_purple);
+  border-radius: 6px;
+}
+
+.form-group {
+  margin: 0.25em;
+}
+
+.password-strength {
+  /* try to get colour from js */
+}
