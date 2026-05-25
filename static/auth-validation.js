@@ -47,7 +47,6 @@ function updatePasswordStrength() {
     const password = document.getElementById('password').value;
     const strengthMeterFill = document.getElementById('strength-meter-fill');
     const strengthText = document.getElementById('strength-text');
-    const strengthBackground = document.getElementById('password-background')
 
     let strength = 0;
     let strengthLevel = 'Weak';
@@ -81,18 +80,16 @@ function updatePasswordStrength() {
         strengthColor = '#28a745'; // Green
     }
 
-    if (strength <= 2) {
-        backgroundStrengthColor = '#000000'; // Red
-    } else if (strength <= 4) {
-        backgroundStrengthColor = '#808080'; // Yellow
-    } else {
-        backgroundStrengthColor = '#ffffff'; // Green
+    if (strength > 0) {
+        //Make heihgt 10px
     }
 
     // Update visual indicator
+    const percentage = (strength / 5) * 100;
+    strengthMeterFill.style.width = percentage + '%';
+    strengthMeterFill.style.backgroundColor = strengthColor;
     strengthText.textContent = `Password strength: ${strengthLevel}`;
     strengthText.style.color = strengthColor;
-    strengthBackground.style.backgroundColor = backgroundStrengthColor;
 }
 
 function checkPasswordMatch() {

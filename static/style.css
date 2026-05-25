@@ -338,13 +338,12 @@ input {
   margin-top: 3vh;
   padding: 4vw;
   border-radius: 25px;
-  background-color: var(--colour_blue);
+  /* background-color: var(--colour_blue); */
   text-align: center;
 }
 
 .welcome-message {
   background-color: var(--colour_turquoise);
-  align-content: center;
   display: flex;
   padding-left: 50%;
 }
@@ -376,9 +375,4 @@ input {
 
 .form-group {
   margin: 0.25em;
-}
-
-.password-background {
-  border-radius: 5px;
-  /* try to get colour from js */
 }
