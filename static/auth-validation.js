@@ -80,8 +80,13 @@ function updatePasswordStrength() {
         strengthColor = '#28a745'; // Green
     }
 
+    if (password === '') {
+        strengthMeterFill.style.height = '0px';
+        strengthColor = '#000000';
+    }
+
     if (strength > 0) {
-        //Make heihgt 10px
+        strengthMeterFill.style.height = '10px';
     }
 
     // Update visual indicator

@@ -161,7 +161,7 @@ input {
 }
 
 .background-img-container {
-  background-image: url("https://zella-mehlis.de/media/pages/freizeit/kultur-freizeiteinrichtungen/bibliothek/23d60e33b7-1706626550/zella-mehlis-header-freizeit-einrichtungen-bibliothek-by-paul-hentschel-photography-by-ph-enterprise.jpg");
+  background-image: url('images/zella-mehlis-header-freizeit-einrichtungen-bibliothek-by-paul-hentschel-photography-by-ph-enterprise.jpg');
   background-size: cover;
   background-position: center;
   height: 400px;
@@ -276,8 +276,7 @@ input {
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   opacity: 0;
-  transition: 1s;
-  
+  transition: opacity 0.3s ease-in-out;
 }
 
 .grid-item-overlay span {
@@ -293,6 +292,7 @@ input {
 
 .grid-item-image:hover .grid-item-overlay {
   opacity: 1;
+  transition: opacity 0s;
 }
 
 .search-bar {
@@ -338,7 +338,7 @@ input {
   margin-top: 3vh;
   padding: 4vw;
   border-radius: 25px;
-  /* background-color: var(--colour_blue); */
+  background-color: var(--colour_blue);
   text-align: center;
 }
 
