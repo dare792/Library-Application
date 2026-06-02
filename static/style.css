@@ -10,6 +10,7 @@ html, body {
   --colour_orange: rgba(189, 57, 57, 1);
   --colour_grey: rgba(217, 217, 217, 1);
   --colour_blue: rgba(94, 111, 218, 1);
+  --colour_warn: rgba(255, 130, 0, 1);
   --colour_turquoise: rgba(184, 183, 153, 1);
 
   --size_circle: 2.8em;
@@ -375,4 +376,21 @@ input {
 
 .form-group {
   margin: 0.25em;
+}
+
+.strength-meter {
+  margin-top: 5px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.strength-text {
+  margin-top: 5px;
+  background-color: white;
+  padding: 2px;
+}
+
+.error-messages {
+  background-color: var(--colour_warn);
+  border-radius: 15px;
 }

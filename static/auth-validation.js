@@ -1,14 +1,9 @@
-// Authentication Form Validation Script
-
-
 document.addEventListener('DOMContentLoaded', function() {
     // Handle signup form if it exists
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
         setupSignupValidation();
     }
-
-    // Handle login form if it exists
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         setupLoginValidation();
@@ -181,12 +176,6 @@ function validateLoginForm() {
     // Check if fields are filled
     if (!email || !password) {
         showAlert('Email and password are required.');
-        return false;
-    }
-
-    // Validate email format
-    if (!isValidEmail(email)) {
-        showAlert('Please enter a valid email address.');
         return false;
     }
 

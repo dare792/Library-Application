@@ -155,17 +155,24 @@ def signup():
 
 def login():
     if request.method == 'POST':
-        email = request.form['email']
+        email_or_username = request.form['email_or_username']
         password = request.form['password']
 
-        user = query_db('SELECT * FROM users WHERE email = ?', (email,), one=True)
+        user_email = query_db('SELECT * FROM users WHERE email = ?', (email_or_username,), one=True)
+        user_name = query_db('SELECT * FROM users WHERE user_name = ?', (email_or_username,), one=True)
 
-        if user and check_password_hash(user['password'], password):
-            session['user_id'] = user['user_id']
-            session['first_name'] = user['first_name']
+        if user_email and check_password_hash(user_email['password'], password):
+            session['user_id'] = user_email['user_id']
+            session['first_name'] = user_email['first_name']
             session['show_welcome'] = True
             return redirect('/dashboard')
         
+        if user_name and check_password_hash(user_name['password'], password):
+            session['user_id'] = user_name['user_id']
+            session['first_name'] = user_name['first_name']
+            session['show_welcome'] = True
+            return redirect('/dashboard')
+
         flash('Invalid credentials!')
     
     return render_template('login.html')
