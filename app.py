@@ -132,20 +132,26 @@ def signup():
         username = request.form['username']
         # Hash the password for security
         password = generate_password_hash(request.form['password'])
+        password_confirmation = generate_password_hash(request.form['confirm_password'])
         first_name = request.form['first_name']
         last_name = request.form['last_name']
-
-        try:
-            db = get_db()
-            query_db('''INSERT INTO users (email, user_name, password, first_name, last_name) 
-                        VALUES (?, ?, ?, ?, ?)''',
-                        (email, username, password, first_name, last_name))
-            db.commit()
-
-            return redirect('/login')
         
-        except sqlite3.IntegrityError:
-            flash('Email or Username already exists!')
+        if request.form['password'] == request.form['confirm_password']:
+
+            try:
+                db = get_db()
+                query_db('''INSERT INTO users (email, user_name, password, first_name, last_name) 
+                            VALUES (?, ?, ?, ?, ?)''',
+                            (email, username, password, first_name, last_name))
+                db.commit()
+
+                return redirect('/login')
+            
+            except sqlite3.IntegrityError:
+                flash('Email or Username already exists!')
+        
+        else:
+            flash('Passwords do not match!')
     
     return render_template('signup.html')
 

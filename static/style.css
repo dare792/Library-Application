@@ -380,13 +380,13 @@ input {
 
 .strength-meter {
   margin-top: 5px;
-  background-color: white;
+  /* background-color: white; */
   overflow: hidden;
 }
 
 .strength-text {
   margin-top: 5px;
-  background-color: white;
+  background-color: rgb(219, 219, 219);
   padding: 2px;
 }
 

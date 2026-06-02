@@ -9,7 +9,9 @@
                 {% if messages %}
                     <div class="error-messages">
                         {% for message in messages %}
-                            <p class="error-text">{{ message }}</p>
+                            {% if message == "Email or Username already exists!" %}
+                                <p class="error-text">{{ message }}</p>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -38,13 +40,23 @@
                         <div class="strength-meter">
                             <div class="strength-meter-fill" id="strength-meter-fill"></div>
                         </div>
-                        <p class="strength-text" id="strength-text">Password strength: Weak</p>
+                        <!-- <p class="strength-text" id="strength-text">Password strength: Weak</p> -->
                     </div>
                 </div>
 
                 <div class="form-group">
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
-                    <p class="match-text" id="match-text" style="margin-top: 5px; background-color: white;"></p>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="error-messages">
+                                {% for message in messages %}
+                                    {% if message == "Passwords do not match!" %}
+                                        <p class="error-text">{{ message }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
                 </div>
 
                 <button type="submit" class="w3-button submit-btn" id="submit-btn">Create Account</button>
