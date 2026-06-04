@@ -40,7 +40,7 @@
             </ul>
             <ul class="menu menu-login">
                 {% if 'user_id' in session %}
-                    <a href="#" class="w3-bar-item w3-button menu-item white">{{ session['first_name'] }}</a>
+                    <a href="/menu" class="w3-bar-item w3-button menu-item white">{{ session['first_name'] }}</a>
                     <a href="/logout" class="w3-bar-item w3-button menu-item white logout-btn">Logout</a>
                 {% else %}
                     <a href="/login" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
