@@ -34,15 +34,15 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/menu")
+@app.route("/settings")
 
-def menu():
+def settings():
     if 'user_id' not in session:
         return redirect('/login')
 
 
 
-    return render_template('menu.html')
+    return render_template('settings.html')
 
 
 @app.route("/collection")

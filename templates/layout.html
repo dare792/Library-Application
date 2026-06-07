@@ -40,8 +40,14 @@
             </ul>
             <ul class="menu menu-login">
                 {% if 'user_id' in session %}
-                    <a href="/menu" class="w3-bar-item w3-button menu-item white">{{ session['first_name'] }}</a>
-                    <a href="/logout" class="w3-bar-item w3-button menu-item white logout-btn">Logout</a>
+                    <div class="menuDropdown">
+                        <button onclick="showDropdown()" class="w3-bar-item w3-button menuDropdown-btn menu-item white">{{ session['first_name'] }}</button>
+                        <div id="menuDropdownContent" class="menuDropdown-content">
+                            <a href="/logout">Logout</a>
+                            <a href="/settings">Settings</a>
+                        </div>
+                    </div>
+                    <!-- <a href="/logout" class="w3-bar-item w3-button menu-item white">Logout</a> -->
                 {% else %}
                     <a href="/login" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
                 {% endif %}
@@ -61,6 +67,7 @@
 
         <script src="{{url_for('static', filename='no-form-pop-up.js')}}"></script>
         <script src="{{url_for('static', filename='scroll-nav.js')}}"></script>
+        <script src="{{ url_for('static', filename='menu-dropdown.js')}}"></script>
 
       {% endblock %}
 
