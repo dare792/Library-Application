@@ -38,15 +38,18 @@
                     </form>
                 </div>
             </ul>
-            <ul class="menu menu-login">
+            <ul class="menu-dropdown">
+                <div id="menuDropdownContent" class="menuDropdown-content">
+                        <a href="/logout">Logout</a>
+                        <a href="/settings">Settings</a>
+                </div>
+            </ul>
+            <ul class="menu menu-login" id="visual-dropdown-flat">
                 {% if 'user_id' in session %}
                     <div class="menuDropdown">
-                        <button onclick="showDropdown()" class="w3-bar-item w3-button menuDropdown-btn menu-item white">{{ session['first_name'] }}</button>
-                        <div id="menuDropdownContent" class="menuDropdown-content">
-                            <a href="/logout">Logout</a>
-                            <a href="/settings">Settings</a>
-                        </div>
+                        <button onclick="showDropdown()" class="w3-bar-item w3-button menuDropdown-btn menu-item white" id="button-dropdown-flat">{{ session['first_name'] }}</button>
                     </div>
+                    
                     <!-- <a href="/logout" class="w3-bar-item w3-button menu-item white">Logout</a> -->
                 {% else %}
                     <a href="/login" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
