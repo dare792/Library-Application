@@ -14,7 +14,7 @@ function showDropdown() {
 
 // Close sropdown when clicking outside of it
 window.onclick = function(hideDropdown) {
-    if (!hideDropdown.target.matches('.menuDropdown-btn'))
+    if (!hideDropdown.target.matches('.menuDropdown-btn')) {
     var dropdowns = document.getElementsByClassName("menuDropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
@@ -23,6 +23,7 @@ window.onclick = function(hideDropdown) {
             openDropdown.classList.remove('show')
             openDropdown.classList.remove('flat-top-right');
         }
+    }
     if (document.getElementById("visual-dropdown-flat").classList.contains('flat-left'))
         document.getElementById("visual-dropdown-flat").classList.remove('flat-left');
 
