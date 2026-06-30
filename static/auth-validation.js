@@ -138,6 +138,23 @@ function validateSignupForm() {
         return false;
     }
 
+    //Check if username fits requirements
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(username) || /\s/.test(username)) {
+        showAlert('Username cannot include special Characters or Spaces');
+        return false;
+    }
+
+    if (username.length > 20) {
+        showAlert('Username cannot be longer than 20 characters');
+        return false;
+    }
+
+    // Check if password meets requirement
+    if (/\s/.test(password)) {
+        showAlert('Password cannot include Spaces');
+        return false;
+    }
+
     // Check minimum password length
     if (password.length < 8) {
         showAlert('Password must be at least 8 characters long.');

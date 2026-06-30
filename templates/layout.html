@@ -48,7 +48,7 @@
             <ul class="menu menu-login" id="visual-dropdown-flat">
                 {% if 'user_id' in session %}
                     <div class="menuDropdown">
-                        <button onclick="showDropdown()" class="w3-bar-item w3-button menuDropdown-btn menu-item white" id="button-dropdown-flat">{{ session['first_name'] }}</button>
+                        <button onclick="showDropdown()" style="width: 135px;" class="w3-bar-item menuDropdown-btn menu-item white" id="button-dropdown-flat">{{ session['first_name'] }}</button>
                     </div>
                     
                     <!-- <a href="/logout" class="w3-bar-item w3-button menu-item white">Logout</a> -->
@@ -64,17 +64,15 @@
         </div>  
       </nav>
 
-      <div class="block-body">
-        {% block body %} {% endblock %}
-      </div>
+    {% block body %} {% endblock %}
       
-      {% block scripts %}
+    {% block scripts %}
 
         <script src="{{url_for('static', filename='no-form-pop-up.js')}}"></script>
         <script src="{{url_for('static', filename='scroll-nav.js')}}"></script>
         <script src="{{ url_for('static', filename='menu-dropdown.js')}}"></script>
 
-      {% endblock %}
+    {% endblock %}
 
 </body>
 </html>
