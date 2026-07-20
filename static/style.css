@@ -11,6 +11,7 @@ html, body {
   --colour_blue: rgba(94, 111, 218, 1);
   --colour_warn: rgba(255, 130, 0, 1);
   --colour_turquoise: rgba(184, 183, 153, 1);
+  --w3_grey: #ccc;
 
   --size_circle: 2.8em;
 }
@@ -352,7 +353,7 @@ input {
 .welcome-message {
   background-color: var(--colour_turquoise);
   display: flex;
-  padding-left: 50%;
+  justify-content: center;
 }
 
 .welcome-message-text {
@@ -411,7 +412,7 @@ input {
 }
 
 .menuDropdown-btn:hover {
-  background-color: #ccc;
+  background-color: var(--w3_grey);
   color: black;
 }
 
@@ -426,11 +427,25 @@ input {
   border-radius: 20px;
 }
 
+.menuDropdown-content a:hover {
+  background-color: var(--w3_grey);
+  color: black;
+}
+
 .menuDropdown-content a{
   color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+}
+
+.top-dropdown-item:hover {
+  border-top-left-radius: 20px;
+}
+
+.bottom-dropdown-item:hover {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .show {display: block;}
@@ -439,8 +454,46 @@ input {
 
 .flat-top-right {border-top-right-radius: 0;}
 
+
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 25px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+}
+
+.settings-popup {
+  border-radius: 25px;
+}
+
 .settings-item {
-  border-style: solid;
-  border-width: 3px;
-  border: 3px;
+  border-radius: 15px;
+}
+
+.setting-close {
+  border-top-right-radius: 25px;
+}
+
+.setting-close:hover {
+  background-color: rgb(237, 78, 78) !important;
+}
+
+.delete {
+  color: red;
+}
+
+.delete:hover {
+  background-color: red !important;
+}
+
+.delete button:hover {
+  background-color: red !important;
 }

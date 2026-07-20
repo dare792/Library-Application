@@ -1,12 +1,76 @@
 {% extends "layout.html" %}
 {% block body %}
 
-    <section style="display: flex; justify-content: center;">
-        <ul>
-            <div class="settings-item"><a style="border: 3px;" href="">Change Username</a></div>
-            <div class="settings-item"><a href="">Change Password</a></div>
-            <div class="settings-item"><a href="">Delete Account</a></div>
-        </ul>
-    </section>
+<section class="settings-panel smooch-sans-700">
+  <div class="settings-item w3-button">
+    <button type="button" class="w3-button" onclick="openSettingsPopup('username')">
+      Change Username
+    </button>
+  </div>
+  <div class="settings-item w3-button">
+    <button type="button" class="w3-button" onclick="openSettingsPopup('password')">
+      Change Password
+    </button>
+  </div>
+  <div class="settings-item delete w3-button">
+    <button type="button" class="w3-button" onclick="openSettingsPopup('delete')">
+      Delete Account
+    </button>
+  </div>
+</section>
 
+<div id="settingsModal" class="w3-modal" style="display:none;">
+  <div class="w3-modal-content w3-animate-top w3-card-4 settings-popup">
+    <header>
+      <span onclick="closeSettingsPopup()" class="w3-button w3-display-topright setting-close">&times;</span>
+      <h3 id="settingsModalTitle">Settings</h3>
+    </header>
+    <div class="w3-container" id="settingsModalBody"></div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    function openSettingsPopup(action) {
+      const title = document.getElementById('settingsModalTitle');
+      const body = document.getElementById('settingsModalBody');
+
+      if (action === 'username') {
+        title.textContent = 'Change Username';
+        body.innerHTML = `
+          <form action="/settings/change-username" method="POST">
+            <label>New username</label>
+            <input class="w3-input" name="username" required>
+            <button class="w3-button w3-margin-top">Save</button>
+          </form>
+        `;
+      } else if (action === 'password') {
+        title.textContent = 'Change Password';
+        body.innerHTML = `
+          <form action="/settings/change-password" method="POST">
+            <label>New password</label>
+            <input class="w3-input" type="password" name="password" required>
+            <button class="w3-button w3-margin-top">Save</button>
+          </form>
+        `;
+      } else if (action === 'delete') {
+        title.textContent = 'Delete Account';
+        body.innerHTML = `
+          <p>Are you sure?</p>
+          <form action="/settings/delete-account" method="POST">
+            <button class="w3-button w3-red">Delete</button>
+          </form>
+        `;
+      }
+
+      document.getElementById('settingsModal').style.display = 'block';
+    }
+
+    function closeSettingsPopup() {
+      document.getElementById('settingsModal').style.display = 'none';
+    }
+  </script>
 {% endblock %}
