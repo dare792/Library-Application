@@ -13,4 +13,9 @@ FROM users;
 
 -- query to input signuo info --
 INSERT INTO users (email, username, password, first_name, last_name) 
-VALUES (?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?);
+
+-- query to change username --
+UPDATE users
+SET user_name = 'bbbbbbbbbb'
+WHERE user_id = 16;

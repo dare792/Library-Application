@@ -12,7 +12,7 @@ function showDropdown() {
     document.getElementById("button-dropdown-flat").classList.toggle("flat-left")
 }
 
-// Close sropdown when clicking outside of it
+// Close dropdown when clicking outside of it
 window.onclick = function(hideDropdown) {
     if (!hideDropdown.target.matches('.menuDropdown-btn')) {
     var dropdowns = document.getElementsByClassName("menuDropdown-content");

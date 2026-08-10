@@ -34,17 +34,6 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/settings")
-
-def settings():
-    if 'user_id' not in session:
-        return redirect('/login')
-
-
-
-    return render_template('settings.html')
-
-
 @app.route("/collection")
 
 def collection():
@@ -141,26 +130,23 @@ def signup():
     if request.method == 'POST':
         email = request.form['email']
         username = request.form['username']
-        # Hash the password for security
-        password = generate_password_hash(request.form['password'])
-        password_confirmation = generate_password_hash(request.form['confirm_password'])
+        # Read raw passwords and validate before hashing
+        password_raw = request.form['password']
+        confirm_password_raw = request.form['confirm_password']
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         
-        if request.form['password'] == request.form['confirm_password']:
-
+        if password_raw == confirm_password_raw:
+            password = generate_password_hash(password_raw)
             try:
                 db = get_db()
                 query_db('''INSERT INTO users (email, user_name, password, first_name, last_name) 
                             VALUES (?, ?, ?, ?, ?)''',
                             (email, username, password, first_name, last_name))
                 db.commit()
-
                 return redirect('/login')
-            
             except sqlite3.IntegrityError:
                 flash('Email or Username already exists!')
-        
         else:
             flash('Passwords do not match!')
     
@@ -194,6 +180,76 @@ def login():
     
     return render_template('login.html')
 
+@app.route("/settings", methods=['GET', 'POST'])
+
+def settings():
+    if 'user_id' not in session:
+        return redirect('/login')
+    
+    return render_template('settings.html')
+
+
+#route to python for changing usernames
+@app.route("/settings/edit", methods=['GET', 'POST'])
+
+def change_username():
+    if 'user_id' not in session:
+        flash('Please log into your account to change your username')
+        return redirect('/settings')
+    
+    if request.method == 'POST':
+        action = request.form.get('action')
+        user_id = session.get('user_id')
+
+        if  action == 'username':
+            username_new = request.form['username']
+            try:
+                db = get_db()
+                query_db('''UPDATE users
+                            SET user_name = ?
+                            WHERE user_id =?''',
+                            (username_new, user_id))
+                db.commit()
+                return redirect('/settings')
+
+            except sqlite3.IntegrityError:
+                flash('Username already exists!')
+
+        if action == 'password':
+            user_row = query_db('SELECT password FROM users WHERE user_id = ?', (user_id,), one=True)
+
+            if not user_row:
+                flash('User not found')
+                return redirect('/settings')
+
+            current_password = request.form.get('current_password')
+            new_password = request.form.get('password')
+            confirm_password = request.form.get('confirm_password')
+
+            if not current_password or not new_password or not confirm_password:
+                flash('Please fill in all password fields')
+                return redirect('/settings')
+
+            if not check_password_hash(user_row['password'], current_password):
+                flash('Current password incorrect')
+                return redirect('/settings')
+
+            if new_password != confirm_password:
+                flash('New passwords do not match')
+                return redirect('/settings')
+
+            db = get_db()
+            query_db('''UPDATE users
+                        SET password = ?
+                        WHERE user_id = ?''',
+                        (generate_password_hash(new_password), user_id))
+            db.commit()
+            flash('Password updated successfully')
+            return redirect('/settings')
+
+    return redirect('/settings')
+
+
 #dashboard route
 #The dashboard is an extended home route, after successful login
 @app.route("/dashboard")
@@ -201,7 +257,6 @@ def dashboard():
     if 'user_id' not in session:
         return redirect('/login')
     return redirect('/')
-    return f"Welcome, {session['first_name']}!"
 
 
 #logout route

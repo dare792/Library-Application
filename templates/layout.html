@@ -56,11 +56,6 @@
                     <a href="/login" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
                 {% endif %}
             </ul>
-            <ul>
-                <a href="#">
-                        <div class="half-circle" title="Change Appearance"></div>
-                </a>
-            </ul>
         </div>  
       </nav>
 
@@ -70,6 +65,7 @@
 
         <script src="{{url_for('static', filename='no-form-pop-up.js')}}"></script>
         <script src="{{url_for('static', filename='scroll-nav.js')}}"></script>
+        <script src="{{ url_for('static', filename='menu-dropdown.js')}}"></script>
         <script src="{{ url_for('static', filename='menu-dropdown.js')}}"></script>
 
     {% endblock %}

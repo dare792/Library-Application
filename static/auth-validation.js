@@ -212,3 +212,31 @@ function isValidEmail(email) {
 function showAlert(message) {
     alert(message);
 }
+
+function setupPasswordValidation() {
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirm_password');
+  const form = document.getElementById('settings-password-form');
+
+  if (passwordInput) {
+    passwordInput.addEventListener('input', updatePasswordStrength);
+  }
+
+  if (confirmPasswordInput) {
+    confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+  }
+
+  if (passwordInput && confirmPasswordInput) {
+    if (!setupSignupValidation()) {
+        return false;
+    }
+  }
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      if (!validateSignupForm()) {
+        e.preventDefault();
+      }
+    });
+  }
+}

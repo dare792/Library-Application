@@ -2,6 +2,22 @@
 {% block body %}
 
 <section class="settings-panel smooch-sans-700">
+  <!-- Display flashed error messages -->
+  {% with messages = get_flashed_messages() %}
+      {% if messages != 'Password updated successfully' %}
+          <div class="error-message bungee white">
+              {% for message in messages %}
+                  <p class="error-text">{{ message }}</p>
+              {% endfor %}
+          </div>
+        {% else %}
+          <div class="confirm-message bungee white">
+              {% for message in messages %}
+                  <p>{{ message }}</p>
+              {% endfor %}
+          </div>
+      {% endif %}
+  {% endwith %}
   <div class="settings-item w3-button">
     <button type="button" class="w3-button" onclick="openSettingsPopup('username')">
       Change Username
@@ -23,7 +39,7 @@
   <div class="w3-modal-content w3-animate-top w3-card-4 settings-popup">
     <header>
       <span onclick="closeSettingsPopup()" class="w3-button w3-display-topright setting-close">&times;</span>
-      <h3 id="settingsModalTitle">Settings</h3>
+      <h3 id="settingsModalTitle" class="setting-title" style="padding-left: 1em;">Settings</h3>
     </header>
     <div class="w3-container" id="settingsModalBody"></div>
   </div>
@@ -32,6 +48,7 @@
 {% endblock %}
 
 {% block scripts %}
+
   {{ super() }}
   <script>
     function openSettingsPopup(action) {
@@ -41,36 +58,82 @@
       if (action === 'username') {
         title.textContent = 'Change Username';
         body.innerHTML = `
-          <form action="/settings/change-username" method="POST">
-            <label>New username</label>
-            <input class="w3-input" name="username" required>
-            <button class="w3-button w3-margin-top">Save</button>
+          <form id="signup-form" action="/settings/edit" method="POST">
+            <ul style="list-style: none; padding-left: 0;">
+              <li><input type="hidden" name="action" value="username"></li>
+              <li><input class="w3-input" id="username" name="username" placeholder="Choose a new username" required></li>
+              <li><button style="font-weight: bolder;" class="w3-button">Save</button></li>
+            </ul>
           </form>
         `;
+        setupPasswordValidation();
       } else if (action === 'password') {
         title.textContent = 'Change Password';
         body.innerHTML = `
-          <form action="/settings/change-password" method="POST">
-            <label>New password</label>
-            <input class="w3-input" type="password" name="password" required>
-            <button class="w3-button w3-margin-top">Save</button>
+          <form action="/settings/edit" id="signup-form" method="POST">
+            <ul style="list-style: none; padding-left: 0;">
+              <li><input type="hidden" name="action" value="password"></li>
+              <li><input class="w3-input" id="current_password" type="password" name="current_password" placeholder="Enter your old password" required></li>
+              <li><input class="w3-input" id="password" type="password" name="password" placeholder="Choose a new password" required></li>
+              <li>
+                  <div class="strength-meter">
+                        <div class="strength-meter-fill" id="strength-meter-fill"></div>
+                  </div>
+              </li>
+              <li><input class="w3-input" id="confirm_password" type="password" name="confirm_password" placeholder="Confirm the new Password" required></li>
+              {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                      <div class="error-messages">
+                          {% for message in messages %}
+                              {% if message == "Passwords do not match!" %}
+                                  <p class="error-text">{{ message }}</p>
+                              {% endif %}
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+              {% endwith %}
+              <li><button style="font-weight: bolder;" class="w3-button">Save</button></li>
+            </ul>
           </form>
         `;
+        setupPasswordValidation();
       } else if (action === 'delete') {
         title.textContent = 'Delete Account';
         body.innerHTML = `
-          <p>Are you sure?</p>
-          <form action="/settings/delete-account" method="POST">
-            <button class="w3-button w3-red">Delete</button>
-          </form>
+          <div style="padding-left: 0.5em">
+            <div id="Sure" style="display: block">
+              <h4>Are you sure?</h4>
+              <h5 style="color: rgba(255, 0, 0, 1)">This can <b>NOT</b> be undone!</h5>
+              <button style="border-radius: 25px; font-weight: bolder;" class="w3-button w3-red" onclick="showDelete()">Yes</button>
+              <button style="border-radius: 25px; font-weight: bolder;" class="w3-button w3-light-grey" onclick="closeSettingsPopup()">No</button>
+            </div>
+            <form id="deleteBtn" action="/settings/delete-account" method="POST" style="display: none;">
+              <button style="border-radius: 25px; font-weight: bolder;" class="w3-button w3-red">Delete</button>
+            </form>
+          </div>
         `;
       }
 
       document.getElementById('settingsModal').style.display = 'block';
+      setupPasswordValidation();
     }
+
+    window.addEventListener('click', (closeSettingsPopup) => {
+      if (event.target('#settingsModal')) {
+        return;
+        closeSettingsPopup()
+      }
+    });
 
     function closeSettingsPopup() {
       document.getElementById('settingsModal').style.display = 'none';
     }
+
+    function showDelete() {
+      document.getElementById('Sure').style.display = 'none';
+      document.getElementById('deleteBtn').style.display = 'block';
+    }
+
   </script>
+  <script src="{{ url_for('static', filename='auth-validation.js') }}"></script>
 {% endblock %}
