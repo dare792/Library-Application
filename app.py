@@ -184,6 +184,7 @@ def login():
 
 def settings():
     if 'user_id' not in session:
+        flash('Log into your account to edit it')
         return redirect('/login')
     
     return render_template('settings.html')
@@ -210,6 +211,7 @@ def change_username():
                             WHERE user_id =?''',
                             (username_new, user_id))
                 db.commit()
+                flash('Username updated successfully')
                 return redirect('/settings')
 
             except sqlite3.IntegrityError:
@@ -250,6 +252,14 @@ def change_username():
     return redirect('/settings')
 
 
+#App route to python deleting the account and (all) associated information
+@app.route("/settings/delete-account", methods=['GET', 'POST'])
+
+def delete_account():
+    if 'user_id' not in session:
+        flash('Please log into your account to delete it.')
+        return redirect('/settings')
+
 #dashboard route
 #The dashboard is an extended home route, after successful login
 @app.route("/dashboard")
@@ -267,6 +277,9 @@ def logout():
     return redirect('/login')
             
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', error = '404')
 
 if __name__ == '__main__':
     app.run(debug=True)

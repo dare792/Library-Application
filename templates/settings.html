@@ -2,21 +2,21 @@
 {% block body %}
 
 <section class="settings-panel smooch-sans-700">
-  <!-- Display flashed error messages -->
+  <!-- Display flashed messages -->
   {% with messages = get_flashed_messages() %}
-      {% if messages != 'Password updated successfully' %}
-          <div class="error-message bungee white">
-              {% for message in messages %}
-                  <p class="error-text">{{ message }}</p>
-              {% endfor %}
-          </div>
-        {% else %}
-          <div class="confirm-message bungee white">
-              {% for message in messages %}
-                  <p>{{ message }}</p>
-              {% endfor %}
-          </div>
-      {% endif %}
+      
+        {% for message in messages %}
+          {% if message == 'Password updated successfully' or message == 'Username updated successfully' %}
+            <div class="confirm-message bungee white">
+              <p class="flash-text">{{ message }}</p>
+            </div>
+          {% else %}
+            <div class="error-message bungee white">
+              <p class="flash-text">{{ message }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+            
   {% endwith %}
   <div class="settings-item w3-button">
     <button type="button" class="w3-button" onclick="openSettingsPopup('username')">

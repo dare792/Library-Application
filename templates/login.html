@@ -7,7 +7,7 @@
             <!-- Display flashed error messages -->
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                    <div class="error-message bungee white">
+                    <div style="margin-left: 1.6em;" class="error-message bungee white">
                         {% for message in messages %}
                             <p class="error-text">{{ message }}</p>
                         {% endfor %}

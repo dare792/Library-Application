@@ -368,7 +368,8 @@ input {
   border-radius: 10px;
   background-color: var(--colour_orange);
   margin-bottom: 1em;
-  width: 100%;
+  max-width: 200px;
+  text-align: center;
 }
 
 .confirm-message {
@@ -377,7 +378,14 @@ input {
   border-radius: 10px;
   background-color: green;
   margin-bottom: 1em;
-  width: 100%;
+  max-width: 200px;
+  text-align: center;
+}
+
+.flash-text {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-size: 70%;
 }
 
 .login-form {
