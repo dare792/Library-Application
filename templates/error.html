@@ -1,6 +1,33 @@
-{% extends "layout.html" %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en" style="background-color: white;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Dancing+Script:wght@400..700&family=Farsan&family=Fjalla+One&family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='error.css')}}">
+    <title>Error {{error}} - ZLC</title>
+</head>
+<body>
+    <div class="error-panel">
+        <img src="https://www.google.com/images/errors/robot.png" alt="Broken Robot" class="robot-img">
+        
+        <h1 class="error-title">Error {{error}}</h1>
 
-{{ error }}
+        <div class="error-message">
+            {% if error == '404' %}
+                <p>We couldn't find the page you were looking for. It might have been moved, deleted, or never existed in the first place.</p>
+            {% elif error == '403' %}
+                <p>Access denied. You don't have the necessary permissions to view this page.</p>
+            {% elif error == '500' %}
+                <p>Oops! Something went wrong on our servers. Our engineers have been notified and are working on it.</p>
+            {% else %}
+                <p>An unexpected error occurred. Please check your connection and try again later.</p>
+            {% endif %}
+        </div>
 
-{% endblock %}
+        <a href="/" class="home-btn">Return to Homepage</a>
+    </div>
+</body>

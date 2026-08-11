@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+}
+.error-panel {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    border-top: 5px solid #dc3545;
+}
+.robot-img {
+    max-width: 130px;
+    margin-bottom: 20px;
+}
+.error-title {
+    font-size: 2rem;
+    margin: 0 0 15px;
+    font-weight: 700;
+}
+.error-message {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    color: #6c757d;
+}
+.home-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0d6efd;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+.home-btn:hover {
+    background-color: #0b5ed7;
+}

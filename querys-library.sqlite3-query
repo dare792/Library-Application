@@ -19,3 +19,15 @@ VALUES (?, ?, ?, ?, ?);
 UPDATE users
 SET user_name = 'bbbbbbbbbb'
 WHERE user_id = 16;
+
+-- delete user information --
+CREATE TRIGGER delete_user_data
+BEFORE DELETE ON users
+BEGIN
+    DELETE FROM users_books WHERE user_id = OLD.id;
+    DELETE FROM wishlist WHERE user_id = OLD.id;
+END;
+
+DELETE FROM users WHERE user_id = 15;
+
+DROP TRIGGER delete_user_data

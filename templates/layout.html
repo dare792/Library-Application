@@ -11,14 +11,6 @@
     <title>Zentral- und Landesbibliothek Christchurch</title>
 </head>
 <body>
-    <!-- Shared Header -->
-<!-- <section class="section-top">
-        <div class="w3-container bar-light">
-            <a href="/" style="text-decoration: none;">
-                <h1 class="dancing-script-700" style="font-size: 300%; margin-left: 0.5em;">Zentral- und Landesbibliothek Christchurch</h1>
-            </a>
-        </div>
-     </section> -->
 
      <!-- Shared Nav-Bar -->
     <nav class="w3-bar bar-light bungee">
@@ -50,8 +42,6 @@
                     <div class="menuDropdown">
                         <button onclick="showDropdown()" style="width: 135px;" class="w3-bar-item menuDropdown-btn menu-item white" id="button-dropdown-flat">{{ session['first_name'] }}</button>
                     </div>
-                    
-                    <!-- <a href="/logout" class="w3-bar-item w3-button menu-item white">Logout</a> -->
                 {% else %}
                     <a href="/login" class="w3-bar-item w3-button menu-item white login-btn">Login</a>
                 {% endif %}

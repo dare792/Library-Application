@@ -260,6 +260,14 @@ def delete_account():
         flash('Please log into your account to delete it.')
         return redirect('/settings')
 
+    user_id = session.get('user_id')
+
+    db = get_db()
+    query_db('''DELETE FROM users WHERE user_id = ?;''',
+                (user_id,))
+    db.commit()
+    return redirect('/')
+
 #dashboard route
 #The dashboard is an extended home route, after successful login
 @app.route("/dashboard")
