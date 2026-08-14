@@ -24,8 +24,8 @@ WHERE user_id = 16;
 CREATE TRIGGER delete_user_data
 BEFORE DELETE ON users
 BEGIN
-    DELETE FROM users_books WHERE user_id = OLD.id;
-    DELETE FROM wishlist WHERE user_id = OLD.id;
+    DELETE FROM users_books WHERE user_id = OLD.user_id;
+    DELETE FROM wishlist WHERE user_id = OLD.user_id;
 END;
 
 DELETE FROM users WHERE user_id = 15;

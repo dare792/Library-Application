@@ -204,6 +204,14 @@ def change_username():
 
         if  action == 'username':
             username_new = request.form['username']
+
+            # Check if username meets requirements
+            if len(username_new) < 3:
+                flash('Username must be at least three characters long')
+                return redirect('/settings')
+
+
+            
             try:
                 db = get_db()
                 query_db('''UPDATE users
@@ -266,6 +274,7 @@ def delete_account():
     query_db('''DELETE FROM users WHERE user_id = ?;''',
                 (user_id,))
     db.commit()
+    session.clear()
     return redirect('/')
 
 #dashboard route
