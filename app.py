@@ -1,3 +1,4 @@
+import re
 import sqlite3
 from flask import Flask, g, render_template, request, redirect, flash, session, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,6 +14,36 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
         db.row_factory = sqlite3.Row
     return db
+
+
+# Validation helpers (mirror client-side checks in auth/edit-validation.js)
+def is_valid_email(email: str) -> bool:
+    email = (email or '').strip()
+    email_regex = r'^[^\s@]+@[^\s@]+\.[^\s@]+$'
+    return bool(re.match(email_regex, email))
+
+
+def is_valid_username(username: str) -> bool:
+    if not username:
+        return False
+    username = username.strip()
+    if len(username) < 3 or len(username) > 20:
+        return False
+    # disallow spaces and a set of special characters
+    if re.search(r'[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]', username) or re.search(r'\s', username):
+        return False
+    return True
+
+
+def is_valid_password(password: str) -> bool:
+    if password is None:
+        return False
+    # no whitespace allowed
+    if re.search(r'\s', password):
+        return False
+    if len(password) < 8:
+        return False
+    return True
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -130,29 +161,48 @@ def search():
 
 def signup():
     if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
+        email = request.form.get('email', '').strip()
+        username = request.form.get('username', '').strip()
         # Read raw passwords and validate before hashing
-        password_raw = request.form['password']
-        confirm_password_raw = request.form['confirm_password']
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
+        password_raw = request.form.get('password', '')
+        confirm_password_raw = request.form.get('confirm_password', '')
+        first_name = request.form.get('first_name', '').strip()
+        last_name = request.form.get('last_name', '').strip()
 
-        #check if raw passwords match befor hashing
-        if password_raw == confirm_password_raw:
-            password = generate_password_hash(password_raw)
-            #add users information to database
-            try:
-                db = get_db()
-                query_db('''INSERT INTO users (email, user_name, password, first_name, last_name) 
-                            VALUES (?, ?, ?, ?, ?)''',
-                            (email, username, password, first_name, last_name))
-                db.commit()
-                return redirect('/login')
-            except sqlite3.IntegrityError:
-                flash('Email or Username already exists!')
-        else:
+        # Check required fields
+        if not email or not username or not first_name or not last_name or not password_raw or not confirm_password_raw:
+            flash('All fields are required.')
+            return redirect('/signup')
+
+        # Validate email, username and password formats
+        if not is_valid_email(email):
+            flash('Please enter a valid email address.')
+            return redirect('/signup')
+
+        if not is_valid_username(username):
+            flash('Username must be 3-20 characters and cannot include spaces or special characters.')
+            return redirect('/signup')
+
+        if not is_valid_password(password_raw):
+            flash('Password must be at least 8 characters long and cannot include spaces.')
+            return redirect('/signup')
+
+        # check if raw passwords match before hashing
+        if password_raw != confirm_password_raw:
             flash('Passwords do not match!')
+            return redirect('/signup')
+
+        password = generate_password_hash(password_raw)
+        # add users information to database
+        try:
+            db = get_db()
+            query_db('''INSERT INTO users (email, user_name, password, first_name, last_name) 
+                        VALUES (?, ?, ?, ?, ?)''',
+                        (email, username, password, first_name, last_name))
+            db.commit()
+            return redirect('/login')
+        except sqlite3.IntegrityError:
+            flash('Email or Username already exists!')
     
     return render_template('signup.html')
 
@@ -162,8 +212,13 @@ def signup():
 
 def login():
     if request.method == 'POST':
-        email_or_username = request.form['email_or_username']
-        password = request.form['password']
+        email_or_username = request.form.get('email_or_username', '').strip()
+        password = request.form.get('password', '')
+
+        # Basic presence validation (mirror client-side)
+        if not email_or_username or not password:
+            flash('Email and password are required.')
+            return redirect('/login')
 
         user_email = query_db('SELECT * FROM users WHERE email = ?', (email_or_username,), one=True)
         user_name = query_db('SELECT * FROM users WHERE user_name = ?', (email_or_username,), one=True)
@@ -212,10 +267,9 @@ def change_username():
         #check which utility is needed
         if  action == 'username':
             username_new = request.form['username']
-
-            # Check if username meets requirements
-            if len(username_new) < 3:
-                flash('Username must be at least three characters long')
+            # Validate new username
+            if not is_valid_username(username_new):
+                flash('Username must be 3-20 characters and cannot include spaces or special characters.')
                 return redirect('/settings')
 
 
@@ -258,6 +312,11 @@ def change_username():
             #failsafe for javascript not detecting mismatched passwords
             if new_password != confirm_password:
                 flash('New passwords do not match')
+                return redirect('/settings')
+
+            # Validate new password meets requirements
+            if not is_valid_password(new_password):
+                flash('Password must be at least 8 characters long and cannot include spaces.')
                 return redirect('/settings')
 
             #update password in database
@@ -308,4 +367,4 @@ def page_not_found(e):
     return render_template('error.html', error = '404')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

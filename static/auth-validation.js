@@ -85,7 +85,7 @@ function updatePasswordStrength() {
     }
 
     // Update visual indicator
-    const percentage = (strength / 5) * 100;
+    const percentage = (strength / 6) * 100;
     strengthMeterFill.style.width = percentage + '%';
     strengthMeterFill.style.backgroundColor = strengthColor;
     strengthText.textContent = `Password strength: ${strengthLevel}`;
